@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="LOGO.jpg">
+  <title>BIA </title>
+</head>
+<body>
+  <div class="logo-wrapper">
+       <h1>BACHIRIL ILYAS ABDELAZIZ</h1>
+  </div>
+  <div class="container">
+    <h2>جميع المنتجات المدخلة</h2>
+    <div style="margin-bottom: 20px;">
+      <input type="text" id="delete-barcode" placeholder="أدخل الباركود للمسح">
+      <button onclick="deleteProductByBarcode()" style="background-color: #f44336;">مسح المنتج</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>الباركود</th>
+          <th>اسم المنتج</th>
+          <th>السعر</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="all-products"></tbody>
+    </table>
+    <button onclick="window.location.href='index.html'" class="products-btn">العودة للصفحة الرئيسية</button>
+  </div>
+
+  <script>
+    const stored = JSON.parse(localStorage.getItem('products')) || {};
+    const table = document.getElementById('all-products');
+    
+    function renderProducts() {
+      table.innerHTML = '';
+      for (const barcode in stored) {
+        const p = stored[barcode];
+        const row = `<tr>
+          <td>${barcode}</td>
+          <td>${p.name}</td>
+          <td>${p.price.toFixed(2)}</td>
+          <td><button onclick="deleteProduct('${barcode}')" style="background-color: #f44336;">مسح</button></td>
+        </tr>`;
+        table.innerHTML += row;
+      }
+    }
+    
+    renderProducts();
+
+    function deleteProduct(barcode) {
+      if (confirm('هل أنت متأكد من رغبتك في مسح هذا المنتج؟')) {
+        delete stored[barcode];
+        localStorage.setItem('products', JSON.stringify(stored));
+        renderProducts();
+      }
+    }
+
+    function deleteProductByBarcode() {
+      const barcode = document.getElementById('delete-barcode').value;
+      if (barcode && stored[barcode]) {
+        deleteProduct(barcode);
+        document.getElementById('delete-barcode').value = '';
+      } else {
+        alert('الباركود غير صحيح أو المنتج غير موجود');
+      }
+    }
+  </script>
+</body>
+</html>
