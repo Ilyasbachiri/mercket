@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="LOGO.jpg">
+  <title> BIA </title>
+</head>
+<body>
+  <!-- شعار في الأعلى -->
+  <div class="logo-wrapper">
+       <h1>BACHIRIL ILYAS ABDELAZIZ</h1>
+  </div>
+   
+  
+
+  <div class="container split">
+    <!-- قسم الإضافة -->
+    <div class="section">
+      <h3>إضافة منتج جديد</h3>
+      <input type="text" id="barcode" placeholder="الباركود">
+      <input type="text" id="name" placeholder="اسم المنتج">
+      <input type="number" id="price" placeholder="السعر">
+      <button onclick="addProduct()">إضافة المنتج</button>
+    </div>
+
+    <!-- قسم الفاتورة -->
+    <div class="section">
+      <h3>إدخال الباركود لإضافة إلى الفاتورة</h3>
+      <input type="text" id="scan-barcode" placeholder="أدخل الباركود هنا">
+      <button onclick="addToInvoice()">إضافة إلى الفاتورة</button>
+
+      <h3>الفاتورة</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>المنتج</th>
+            <th>السعر</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="invoice-body"></tbody>
+      </table>
+      <div class="total">الإجمالي: <span id="total">0</span> $</div>
+    </div>
+  
+ <br>
+
+    <button onclick="window.location.href='prodect.html'" class="products-btn">عرض كل المنتجات</button>
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>
